@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd        
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+     	http://www.springframework.org/schema/aop 
+     	http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+     	http://www.springframework.org/schema/tx 
+     	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/mvc 
+     	http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<!-- 让扫描spring扫描这个包下所有的类，让标注spring注解的类生效 -->
+	<context:component-scan base-package="com.zhh.yh">
+	</context:component-scan>
+	
+	<!-- 开启注解 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:db.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 数据源，使用jdbc -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- <property name="maxActive" value="10" /> -->
+		<!-- <property name="maxIdle" value="5" /> -->
+	</bean>
+	
+	<!-- mybatis文件配置，扫描所有mapper文件 -->
+	 <bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource" 
+		p:typeAliasesPackage="com.zhh.yh.**.entity"
+		p:configLocation="classpath:mybatis.xml" 
+		p:mapperLocations="classpath:mapper/*.xml" />
+		
+	<!-- spring与mybatis整合配置，扫描所有dao -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+		p:basePackage="com.zhh.yh.**.dao" 
+		p:sqlSessionFactoryBeanName="sqlSessionFactory" />	
+	
+	
+	<!-- sqlSessionFactory -->
+	<!-- <bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		数据库连接池
+		<property name="dataSource" ref="dataSource" />
+		加载mybatis的全局配置文件
+		<property name="configLocation"
+			value="classpath:mybatis/SqlMapConfig.xml" />
+	</bean> -->
+	
+	<!-- mapper扫描器 -->
+	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开
+		<property name="basePackage" value="com.zsx.auty.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean> -->
+
+	<!-- 事务管理器 对mybatis操作数据库事务控制，
+		spring使用jdbc的事务控制类 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 使用注解来控制事务 -->
+    <!-- <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven> -->
+	
+	<!-- 试图解析 -->
+	<!-- <bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean> -->
+	
+	<!-- Velocity视图解析器 默认视图 -->
+	<bean id="velocityViewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="viewNames" value="*.html" />
+		<property name="suffix" value="" />
+		<property name="dateToolAttribute" value="date" />
+		<property name="numberToolAttribute" value="number" />
+		<property name="requestContextAttribute" value="rc" />
+		<property name="order" value="0" />
+	</bean>
+	
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/view/" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="contentType">text/html;charset=UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- FreeMarker视图解析器 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+		<property name="contentType" value="text/html; charset=utf-8" />
+		<property name="cache" value="false" />
+		<property name="viewNames" value="*.ftl" />
+		<property name="suffix" value="" />
+		<property name="order" value="2" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/view/" />
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1000000000" />
+	</bean>
+
+	<!-- 事务管理 通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 对save,update,remove 开头的方法进行事务管理,只要有异常就回滚 -->
+			<tx:method name="save*" propagation="REQUIRED"
+				rollback-for="java.lang.Throwable" />
+			<tx:method name="remove*" propagation="REQUIRED"
+				rollback-for="java.lang.Throwable" />
+			<tx:method name="update*" propagation="REQUIRED"
+				rollback-for="java.lang.Throwable" />
+			<tx:method name="batch*" propagation="REQUIRED"
+				rollback-for="java.lang.Throwable" />
+			<tx:method name="clear*" propagation="REQUIRED"
+				rollback-for="java.lang.Throwable" />
+			<!-- select,count开头的方法,开启只读,提高数据库访问性能 -->
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="count*" read-only="true" />
+			<!-- 对其他方法 使用默认的事务管理 -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+</beans>

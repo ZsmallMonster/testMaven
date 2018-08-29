@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.zhh</groupId>
+    <artifactId>yh-security</artifactId>
+    <version>${yh-version}</version>
+  </parent>
+  <artifactId>yh-web</artifactId>
+  <packaging>war</packaging>
+  
+  <dependencies>
+  	<dependency>
+      <groupId>com.zhh</groupId>
+      <artifactId>yh-model</artifactId>
+      <version>${yh-version}</version>
+    </dependency>  
+  </dependencies>
+  
+  <build>
+    <finalName>yh-security</finalName>
+  </build>
+</project>
