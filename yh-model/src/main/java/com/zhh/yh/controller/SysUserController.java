@@ -24,11 +24,11 @@ public class SysUserController {
 	public String getUser(HttpServletRequest request,
 				HttpServletResponse response,
 				SysUserEntity user) {
-		String username = "test";
-		sysUserService.getByUserName(username);
+		//String username = "test";
+		//sysUserService.getByUserName(username);
 		
 		System.out.println("=====================================>>");
-		return "login";
+		return "123.html";
 	}
 	
 	public String saveUser(HttpServletRequest request,
