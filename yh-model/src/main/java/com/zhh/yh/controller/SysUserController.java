@@ -26,7 +26,8 @@ public class SysUserController {
 				SysUserEntity user) {
 		//String username = "test";
 		//sysUserService.getByUserName(username);
-		
+		String username = "zhangsan";
+		SysUserEntity u = sysUserService.getByUserName(username);
 		System.out.println("=====================================>>");
 		return "123.html";
 	}

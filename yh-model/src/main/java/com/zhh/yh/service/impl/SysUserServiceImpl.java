@@ -18,12 +18,14 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Autowired
 	private SysUserMapper sysUserMapper;
+	
 	@Override
 	public SysUserEntity getByUserName(String username) {
 		
 		return sysUserMapper.getByUserName(username);
 	
 	}
+	
 	@Override
 	public int saveUser(SysUserEntity user) {
 
