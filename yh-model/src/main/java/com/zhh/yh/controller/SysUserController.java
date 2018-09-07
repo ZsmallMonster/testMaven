@@ -26,6 +26,9 @@ public class SysUserController {
 				SysUserEntity user) {
 		//String username = "test";
 		//sysUserService.getByUserName(username);
+		
+	//提交到那里了？
+		
 		String username = "zhangsan";
 		SysUserEntity u = sysUserService.getByUserName(username);
 		System.out.println("=====================================>>");
