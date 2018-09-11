@@ -32,7 +32,7 @@ public class SysUserController {
 		String username = "zhangsan";
 		SysUserEntity u = sysUserService.getByUserName(username);
 		System.out.println("=====================================>>");
-		return "123.html";
+		return "user/add.html";
 	}
 	@RequestMapping("add")
 	public String saveUser(HttpServletRequest request,
