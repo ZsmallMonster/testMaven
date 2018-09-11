@@ -29,8 +29,6 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public int saveUser(SysUserEntity user) {
 
-		//user.getUsername();
-		//user.getPassword();
 		return sysUserMapper.saveUser(user);
 	}
 

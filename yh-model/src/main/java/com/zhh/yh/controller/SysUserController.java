@@ -34,15 +34,15 @@ public class SysUserController {
 		System.out.println("=====================================>>");
 		return "123.html";
 	}
-	
+	@RequestMapping("add")
 	public String saveUser(HttpServletRequest request,
 			HttpServletResponse response,
 			SysUserEntity user) {
-		user.setUsername("123");
-		user.setPassword("123");
+		user.setUsername("王刚");
+		user.setPassword("123456");
 		sysUserService.saveUser(user);
 		//返回到用户列表用页面
-		return "login";
+		return "123.html";
 	}
 	
 }
