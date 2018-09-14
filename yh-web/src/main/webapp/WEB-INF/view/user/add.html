@@ -8,6 +8,19 @@
   <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+	<script type="text/javascript">
+		function add(){
+		$.ajax({
+			type:"post",
+			dataType:"html",
+			url:"add",
+			success:function(msg){
+				alert("添加成功");
+			},
+		});
+	}
+	</script>
 </head>
 <body>
 	<div class="container-fluid" id="yh" v-cloak="">
@@ -32,15 +45,5 @@
 			</tr>
 		</table>
 	</div>
-	
-	<script type="text/javascript">
-	function add(){
-		$.ajax({
-			type="POST",
-			dataType="json",
-			url="add",
-		})
-	}
-</script>
 </body>
 </html>

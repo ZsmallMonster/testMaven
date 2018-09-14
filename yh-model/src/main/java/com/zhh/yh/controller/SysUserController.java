@@ -38,6 +38,7 @@ public class SysUserController {
 	public String saveUser(HttpServletRequest request,
 			HttpServletResponse response,
 			SysUserEntity user) {
+		System.out.println("=======>>>>终于进来了！");
 		user.setUsername("王刚");
 		user.setPassword("123456");
 		sysUserService.saveUser(user);
