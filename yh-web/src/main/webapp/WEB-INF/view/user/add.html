@@ -7,43 +7,55 @@
   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>  
   <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-	<script type="text/javascript">
+<script type="text/javascript">
 		function add(){
-		$.ajax({
-			type:"post",
-			dataType:"html",
-			url:"add",
-			success:function(msg){
-				alert("添加成功");
-			},
-		});
+			/* var user = {
+				username:$("#username").val(),
+				password:$("#password").val()
+			}; */
+			$.ajax({
+				type:"post",
+				url:"add",
+				data:user = {
+						username:$("#username").val(),
+						password:$("#password").val()
+					},
+				dataType:"json",
+				success:
+					function(msg){
+						alert("添加成功");
+					},
+			});
 	}
 	</script>
+
+	
 </head>
 <body>
-	<div class="container-fluid" id="yh" v-cloak="">
+	<div class="container-fluid" id="yh" >
 		<table class="form" id="form">
 			<tr>
 				<td class="formName">用户名<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="text" class="form-control" placehodle="用户名" v-model="user.username" idvalid="yes" checkexpession="NotNull"/>
+					<input id="username" name="username" type="text" />
 				</td>
 			</tr>
 			<tr>
 				<td class="formName">密码<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="text" class="form-control" placehodle="密码" v-model="user.password" idvalid="yes" checkexpession="NotNull"/>
+					<input id="password" name="password" type="text" />
 				</td>
 			</tr>
 			<tr>
 				<td class="formName">注册<font face="宋体">*</font></td>
 				<td class="formValue">
-					<input type="submit" value="注册" onclick="add()"/>
+					<!-- <input type="submit" value="注册" onclick="add()"/> -->
+				<button type="button" onclick="add()">注册</button>
 				</td>
 			</tr>
 		</table>
 	</div>
+	
+	
 </body>
 </html>

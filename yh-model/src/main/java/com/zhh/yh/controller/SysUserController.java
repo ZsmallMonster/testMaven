@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zhh.yh.entity.SysUserEntity;
@@ -29,21 +30,23 @@ public class SysUserController {
 		
 	//提交到那里了？
 		
-		String username = "zhangsan";
-		SysUserEntity u = sysUserService.getByUserName(username);
+		//String username = "zhangsan";
+		//SysUserEntity u = sysUserService.getByUserName(username);
 		System.out.println("=====================================>>");
 		return "user/add.html";
 	}
+	
+	//@ModelAttribute
 	@RequestMapping("add")
 	public String saveUser(HttpServletRequest request,
 			HttpServletResponse response,
 			SysUserEntity user) {
 		System.out.println("=======>>>>终于进来了！");
-		user.setUsername("王刚");
-		user.setPassword("123456");
+		//user.setUsername("王刚");
+		//user.setPassword("123456");
 		sysUserService.saveUser(user);
 		//返回到用户列表用页面
-		return "123.html";
+		return "success.html";//执行了，但是怎么就是不到这个页面。html页面里的ajax中的success也并未出现，
 	}
 	
 }
