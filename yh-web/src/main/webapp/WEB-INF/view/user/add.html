@@ -13,6 +13,7 @@
 				username:$("#username").val(),
 				password:$("#password").val()
 			}; */
+			$("#mydiv").html("<p>已经被改变了</p>")
 			$.ajax({
 				type:"post",
 				url:"add",
@@ -22,9 +23,13 @@
 					},
 				dataType:"json",
 				success:
-					function(msg){
-						alert("添加成功");
+					function(result){
+						alert(result.msg);
 					},
+				error:
+					function(){
+					alert("有毛病");
+				}
 			});
 	}
 	</script>
@@ -52,6 +57,9 @@
 					<!-- <input type="submit" value="注册" onclick="add()"/> -->
 				<button type="button" onclick="add()">注册</button>
 				</td>
+			</tr>
+			<tr>
+				<td id="mydiv" ><p>这里会被改变吗？</p></td>			
 			</tr>
 		</table>
 	</div>
