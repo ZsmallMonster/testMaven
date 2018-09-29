@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zhh.yh.dao.SysUserMapper">
+
+	<select id="findAllUser" resultType="SysUserEntity">
+		SELECT
+			user_id,
+			username,
+			email,
+			mobile,
+			status,
+			gmt_create
+		FROM
+			sys_user
+	</select>
 	
 	<select id="listForPage" resultType="SysUserEntity">
 		SELECT

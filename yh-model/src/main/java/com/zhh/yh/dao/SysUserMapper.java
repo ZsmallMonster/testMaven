@@ -32,4 +32,6 @@ public interface SysUserMapper {
 	
 	int saveUser(SysUserEntity user);
 	
+	List<SysUserEntity> findAllUser();
+	
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>alluser测试</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>  
+  <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+		function findalluser(){
+			$.ajax({
+				type:"get",
+				url:"alluser",
+				dataType:"json",
+				success:
+					function(result){
+						alert(result.msg);
+					},
+				error:
+					function(){
+					alert("有毛病");
+				}
+			});
+	}
+	</script>
+
+	
+</head>
+<body>
+	<button type="button" onclick="findalluser()">查询所有用户</button>
+</body>
+</html>

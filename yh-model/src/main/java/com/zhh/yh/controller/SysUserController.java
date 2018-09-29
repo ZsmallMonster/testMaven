@@ -1,6 +1,7 @@
 package com.zhh.yh.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -38,7 +40,7 @@ public class SysUserController {
 		//String username = "zhangsan";
 		//SysUserEntity u = sysUserService.getByUserName(username);
 		System.out.println("=====================================>>");
-		return "user/add.html";
+		return "user/findalluser.html";
 	}
 	
 	//@ModelAttribute
@@ -56,6 +58,18 @@ public class SysUserController {
 		JSON.toJSON(result);
 		//返回到用户列表用页面
 		return result;//执行了，但是怎么就是不到这个页面。html页面里的ajax中的success也并未出现，
+	}
+	
+	@RequestMapping(value="alluser",method = RequestMethod.GET)
+	public List<SysUserEntity> findAllUser(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			SysUserEntity user){
+		
+		List<SysUserEntity> allUser = sysUserService.findAllUser();
+		
+		System.out.println(allUser);
+		return allUser;
 	}
 	
 }

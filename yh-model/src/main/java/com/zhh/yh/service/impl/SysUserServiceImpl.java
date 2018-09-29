@@ -1,5 +1,7 @@
 package com.zhh.yh.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,12 @@ public class SysUserServiceImpl implements SysUserService {
 	public int saveUser(SysUserEntity user) {
 
 		return sysUserMapper.saveUser(user);
+	}
+
+	@Override
+	public List<SysUserEntity> findAllUser() {
+		
+		return sysUserMapper.findAllUser();
 	}
 
 }
